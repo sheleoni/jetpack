@@ -41,7 +41,6 @@ var scoreArea = document.querySelector(".score-area")
 var imageArea = document.querySelector('.image-display')
 
 // set point and bug icon as variable 
-
 var pointIcon = '🚀'
 var oopsIcon = '<span class="grey">🚀</span>'
 
@@ -108,19 +107,14 @@ function displayCorrAnswer(){
 
 function checkAnswer() {
 
-    if (userChoice === randomQuestionAnswer) {
+
+    if (userChoice === randomQuestionAnswer) 
+    {
       console.log('correct!')
       questionDisplay.innerHTML = randomQuestionCorrSentence
       userAnswer.innerHTML += 'Correct!'
       scoreArea.innerHTML += pointIcon
       
-    }
-    else if (keyboardChoice === randomQuestionAnswer){
-      console.log('correct!')
-      questionDisplay.innerHTML = randomQuestionCorrSentence
-      userAnswer.innerHTML += 'Correct!'
-      scoreArea.innerHTML += pointIcon
-
     }
     else {
       console.log('oopsies!')
@@ -129,6 +123,26 @@ function checkAnswer() {
     }
 }
 
+
+// trying to separate checkAnswer for check Keyboard answer
+// instead of using the if (userChoice), else if (for keyboard's case), else structure
+// need to investigate why if...else if...else didn't work.
+
+function checkKeyboardAnswer() {
+
+  if (keyboardChoice === randomQuestionAnswer){
+    console.log('correct!')
+    questionDisplay.innerHTML = randomQuestionCorrSentence
+    userAnswer.innerHTML += 'Correct!'
+    scoreArea.innerHTML += pointIcon
+
+  }
+  else {
+    console.log('oopsies!')
+    scoreArea.innerHTML += oopsIcon
+    displayCorrAnswer();
+  }
+}
 
 
 
@@ -217,8 +231,9 @@ imageArea.appendChild(pronounImage)
 const handleClickFromKeyboard = (keyboardChoice) => {
 
   console.log(keyboardChoice)
+  console.log(userChoice)
 
-  if (isAttempted == false){ checkAnswer(keyboardChoice) }
+  if (isAttempted == false){ checkKeyboardAnswer(keyboardChoice) }
   else { console.log("You've already attempted!")}
   isAttempted = true
 }
